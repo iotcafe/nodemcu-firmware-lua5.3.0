@@ -4,6 +4,10 @@
 
 double floor(double);
 double pow(double, double);
+double fmod(double x, double y);
+#define floorf floor
+#define powf pow
+#define fmodf fmod
 
 #if 0
 #ifndef HUGE_VAL

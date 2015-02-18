@@ -51,7 +51,7 @@
 // #define BUILD_WOFS		1
 #define BUILD_SPIFFS	1
 
-#define LUA_USE_MODULES
+//#define LUA_USE_MODULES
 
 #ifdef LUA_USE_MODULES
 #define LUA_USE_MODULES_NODE

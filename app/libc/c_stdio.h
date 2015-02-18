@@ -51,8 +51,12 @@ extern int c_stderr;
 #define c_zalloc os_zalloc
 #define c_free os_free
 
+#if defined( LUA_USE_MODULES_NODE )
 extern void output_redirect(const char *str);
 #define c_puts output_redirect
+#else
+#define c_puts uart0_sendStr
+#endif
 
 // #define c_printf os_printf
 // int	c_printf(const char *c, ...);
@@ -60,7 +64,7 @@ extern void output_redirect(const char *str);
 #define c_sprintf os_sprintf
 #else
 #include "c_stdarg.h"
-void c_sprintf(char* s,char *fmt, ...);
+int c_sprintf (char *buf, const char *fmt, ...);
 #endif
 
 // #define c_vsprintf ets_vsprintf
@@ -69,6 +73,8 @@ void c_sprintf(char* s,char *fmt, ...);
 	c_sprintf(__print_buf, __VA_ARGS__);	\
 	c_puts(__print_buf);					\
 } while(0)
+
+int c_snprintf (char *buf, size_t maxlen, const char *fmt, ...);
 
 // #define c_getc ets_getc
 // #define c_getchar ets_getc

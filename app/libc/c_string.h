@@ -33,6 +33,8 @@
 #define c_strpbrk strpbrk
 #define c_strcoll strcoll
 #define c_strrchr strrchr
+float c_strtof(const char *string, char **endPtr);
+#define c_strerror strerror
 
 // const char *c_strstr(const char * __s1, const char * __s2);
 // char *c_strncat(char * __restrict /*s1*/, const char * __restrict /*s2*/, size_t n);

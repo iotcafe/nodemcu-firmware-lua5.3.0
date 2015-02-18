@@ -35,7 +35,7 @@ uint8_t platform_key_led( uint8_t level){
 
 // ****************************************************************************
 // GPIO functions
-#ifdef GPIO_INTERRUPT_ENABLE
+#if defined( LUA_USE_MODULES_GPIO ) && defined( GPIO_INTERRUPT_ENABLE )
 extern void lua_gpio_unref(unsigned pin);
 #endif
 int platform_gpio_mode( unsigned pin, unsigned mode, unsigned pull )
@@ -74,7 +74,7 @@ int platform_gpio_mode( unsigned pin, unsigned mode, unsigned pull )
 
   switch(mode){
     case PLATFORM_GPIO_INPUT:
-#ifdef GPIO_INTERRUPT_ENABLE
+#if defined( LUA_USE_MODULES_GPIO ) && defined( GPIO_INTERRUPT_ENABLE )
       lua_gpio_unref(pin);    // unref the lua ref call back.
 #endif
       GPIO_DIS_OUTPUT(pin_num[pin]);
