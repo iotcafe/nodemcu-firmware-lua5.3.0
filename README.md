@@ -1,5 +1,7 @@
 # **NodeMcu** #
-version 0.9.5
+version 0.9.6 
+Pre alpha unstable for Lua 5.3.0.
+When stable, it may move to NodeMCU official github repo.
 ###A lua based firmware for wifi-soc esp8266
 Build on [ESP8266 sdk 0.9.5](http://bbs.espressif.com/viewtopic.php?f=5&t=154)<br />
 Lua core based on [eLua project](http://www.eluaproject.net/)<br />
