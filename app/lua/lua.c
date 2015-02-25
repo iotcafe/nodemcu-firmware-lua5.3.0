@@ -652,6 +652,8 @@ int lua_main (int argc, char **argv) {
   result = lua_toboolean(L, -1);  /* get result */
   report(L, status);
 
+  luaL_openlibs(L);
+  luaopen_base(L);
   gLoad.L = L;
   gLoad.firstline = 1;
   gLoad.done = 0;
