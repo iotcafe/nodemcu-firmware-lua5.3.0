@@ -696,14 +696,17 @@ void dojob(lua_Load *load){
       l = c_strlen(b);
       if (l > 0 && b[l-1] == '\n')  /* line ends with newline? */
         b[l-1] = '\0';  /* remove it */
-      if (load->firstline && b[0] == '=')  /* first line starts with `=' ? */
-        lua_pushfstring(L, "return %s", b+1);  /* change it to `return' */
+      if (load->firstline && b[0] == '=')  /* for compatibility with 5.2, ... */
+        lua_pushfstring(L, "return %s", b + 1);  /* change '=' to 'return' */
       else
         lua_pushstring(L, b);
       if(load->firstline != 1){
-        lua_pushliteral(L, "\n");  /* add a new line... */
-        lua_insert(L, -2);  /* ...between the two lines */
-        lua_concat(L, 3);  /* join them */
+        if ((status = addreturn(L)) != LUA_OK)  /* 'return ...' did not work? */
+        {    
+          lua_pushliteral(L, "\n");  /* add newline... */
+          lua_insert(L, -2);  /* ...between the two lines */
+          lua_concat(L, 3);  /* join them */
+        }
       }
 
       status = luaL_loadbuffer(L, lua_tostring(L, 1), lua_rawlen(L, 1), "=stdin");
